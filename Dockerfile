@@ -13,10 +13,13 @@ RUN pkg="java-1.$JAVA_VERSION.0-openjdk"; \
         pkg="$pkg-headless"; \
     fi; \
     yum install -y "$pkg" && \
-    yum clean all
+    yum install -y "wget" && \
+    yum clean all  && \
+	cd /usr && \
+	wget https://downloads.typesafe.com/play/1.2.7.2/play-1.2.7.2.zip
 
 COPY profile.d/java.sh /etc/profile.d/
 COPY profile.d/custom.sh /etc/profile.d/
-COPY programs/play127/**/*  /usr/play/
+#COPY programs/play127/**/*  /usr/play/
 
 CMD /bin/bash

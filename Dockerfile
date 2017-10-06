@@ -14,12 +14,17 @@ RUN pkg="java-1.$JAVA_VERSION.0-openjdk"; \
     fi; \
     yum install -y "$pkg" && \
     yum install -y "wget" && \
+    yum install -y "unzip" && \
+    yum install -y "mv" && \
     yum clean all  && \
 	cd /usr && \
-	wget https://downloads.typesafe.com/play/1.2.7.2/play-1.2.7.2.zip
+	wget https://downloads.typesafe.com/play/1.2.7.2/play-1.2.7.2.zip \
+	unzip play-1.2.7.2.zip \
+	mv  play-1.2.7.2 play 
 
 COPY profile.d/java.sh /etc/profile.d/
 COPY profile.d/custom.sh /etc/profile.d/
-#COPY programs/play127/**/*  /usr/play/
+COPY profile.d/play.sh /etc/profile.d/
+COPY profile.d/Plarx.sh /etc/profile.d/
 
 CMD /bin/bash
